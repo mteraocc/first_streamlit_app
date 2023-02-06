@@ -37,15 +37,14 @@ streamlit.write('The user entered ', fruit_choice)
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
 #streamlit.text(fruityvice_response.json()) #just write the data to the screen
 
-# don't run anything past here while we troubleshoot
-streamlit.stop()
-
-
-
 # write your own comment -what does the next line do? -normalize json data
 fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 # write your own comment - what does this do? - put in dataframe 
 streamlit.dataframe(fruityvice_normalized)
+
+# don't run anything past here while we troubleshoot
+streamlit.stop()
+
 
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
